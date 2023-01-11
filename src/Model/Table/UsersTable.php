@@ -135,12 +135,55 @@ class UsersTable extends Table
                 'notBlank' => [
                     'rule'    => ['notBlank'],
                     'message' => 'Please enter your password',
-                    'last' => true
                 ],
-                'password' => [
-                    'rule' => array('custom', '(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]*).{8,}$)'),
-                    'message' => 'password should contain alteast 8 digits, 1 Special Character, 1 number, 1 uppercase, 1 lowercase'
-                ]
+                'upperCase' => [
+                    'rule' => function ($value) {
+                        $count = mb_strlen(preg_replace('![^A-Z]+!', '', $value));
+                        if ($count > 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    'message' => 'Please enter at least one uppercase',
+                ],
+                'lowerCase' => [
+                    'rule' => function ($value) {
+                        $count = mb_strlen(preg_replace('![^a-z]+!', '', $value));
+                        if ($count > 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    'message' => 'Please enter at least one lowercase',
+                ],
+                'numeric' => [
+                    'rule' => function ($value) {
+                        $count = mb_strlen(preg_replace('![^0-9]+!', '', $value));
+                        if ($count > 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    'message' => 'Please enter at least one numeric',
+                ],
+                'special' => [
+                    'rule' => function ($value) {
+                        $count = mb_strlen(preg_replace('![^@#*]+!', '', $value));
+                        if ($count > 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    'message' => 'Please enter at least one special character',
+                ],
+                'minLength' => [
+                    'rule' => ['minLength', 8],
+                    'message' => 'Password need to be 8 characters long',
+                ],
             ]);
 
         $validator
@@ -153,11 +196,6 @@ class UsersTable extends Table
                     'message' => 'Please enter your confirm-password',
                     'last' => true,
                 ],
-                'confirm_password' => [
-                    'rule' => array('custom', '(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]*).{6,}$)'),
-                    'last' => true,
-                    'message' => 'confirm password should contain alteast 8 digits, 1 Special Character, one number, 1 uppercase, 1 lowercase '
-                ],
                 'match' => [
                     'rule' => array('compareWith', 'password'),
                     'last' => true,
@@ -166,11 +204,10 @@ class UsersTable extends Table
             ]);
 
 
-        $validator
+            $validator
             ->scalar('Gender')
-            ->maxLength('Gender', 10)
             ->requirePresence('Gender', 'create')
-            ->notEmptyString('Gender', 'please select your gender');
+            ->notEmptyString('Gender');
 
             $validator
             ->scalar('image')

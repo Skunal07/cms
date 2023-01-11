@@ -116,9 +116,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $user->email = $email;
-            $token = rand(10000, 99999);
-            $result = $this->Users->checkMailExist($email, $token);
+            $result = $this->Users->checkEmailExist($email);
             if ($result) {
+            $token = rand(10000, 99999);
+            $result = $this->Users->insertToken($email, $token);
 
                 $mailer = new Mailer('default');
                 $mailer->setTransport('gmail'); //your email configuration name
@@ -193,12 +194,16 @@ class UsersController extends AppController
             $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $password = $this->request->getData('password');
+                $result=preg_match('(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]*).{8,}$)', $password);
+                $confirm_password = $this->request->getData('confirm_password');
+                if($result ==1 && $password == $confirm_password){
                 $res = $this->Users->resetPassword($token, $password);
                 if ($res) {
                     $session->destroy();
                     $this->Flash->success(__('Password updated successfully.'));
                     return $this->redirect(['action' => 'login']);
                 }
+            }
                 $this->Flash->error(__('Please enter valid password'));   
         }
         $this->set(compact('user'));

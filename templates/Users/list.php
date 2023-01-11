@@ -31,7 +31,6 @@ $this->Breadcrumbs->add(
             </thead>
             <tbody>
                 <?php
-                
                 foreach ($users as $user): ?>
                 <tr>
                     <td><?= $this->Number->format($user->Id) ?></td>
