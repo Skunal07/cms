@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url(/img/tree.jpg) ;
+       /* background-position: center; */
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: sans-serif;
+    color: rgb(0, 0, 0);
+    /* margin-top: 40px; */
+}
+h1{
+    color: rgb(51, 117, 240);
+    margin: 50px;
+}
+
+
+.main{
+    background-image:linear-gradient(to right,#93bcf1,#1d9edf);
+    /* background: rgb(193, 224, 241); */
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px;
+    margin-top: 120px;
+}
+    /* .form-control {
+        
+        background-color: transparent;
+    color: rgb(0, 0, 0);
+  } */
+ 
+  .log{
+    margin-left: 450px; 
+    margin-bottom: 50px;
+
+  }
+
+/* Flash messages */
+.message {
+    padding: 1rem;
+
+    background: #eff8ff;
+    color: #2779bd;
+
+    border-color: #6cb2eb;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+.message.hidden {
+    display: none;
+}
+.message.success {
+    background: #e3fcec;
+    color: #1f9d55;
+    border-color: #51d88a;
+}
+.message.warning {
+    background: #fffabc;
+    color: #8d7b00;
+    border-color: #d3b800;
+}
+.message.error {
+    background: #fcebea;
+    color: #cc1f1a;
+    border-color: #ef5753;
+}
+
+
+.error-message{
+    color: red;
+}
+.rahul{
+    display: flex;
+    flex-direction: row;
+}
+.rahul label{
+    margin-right: 10px;
+}
+.cen {
+    
+    display:block;
+    float:unset;
+    margin-left:450px;
+    padding:5px 10px
+}
+.cent {
+    
+    display:block;
+    float:unset;
+    margin-left:500px;
+    padding:5px 10px
+}
+  
