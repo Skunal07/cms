@@ -231,7 +231,11 @@ class UsersTable extends Table
     }
     public function login($email, $password)
     {
+        $data=array();
         $result = $this->find('all')->where(['Email' => $email, 'password' => $password])->first();
+        $data['role']=$result['role'];
+        $data['id']=$result['Id'];
+        echo $data;die;
         if ($result) {
             return true;
         } else {

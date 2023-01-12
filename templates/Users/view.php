@@ -21,7 +21,7 @@ $this->Breadcrumbs->add(
             $session = $this->request->getSession(); //read session data
             if ($session->read('email') != null) {
             ?>
-                <?= $this->Html->link(__('Back'), ['action' => 'list'], ['class' => 'nav-link active']) ?>
+                <?= $this->Html->link(__('Back'), ['action' => 'list'], ['class' => 'button float-right']) ?>
 
             <?php
             } else {

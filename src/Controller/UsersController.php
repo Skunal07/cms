@@ -114,6 +114,7 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('mydefault');
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
             $email = $this->request->getData('email');
             $user->email = $email;
             $result = $this->Users->checkEmailExist($email);
@@ -144,10 +145,9 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('login');
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
             $email = $this->request->getData('Email');
             $password =  $this->request->getData('password');
-
+            
             $result = $this->Users->login($email, $password);
             echo $result;
             // die();
@@ -155,20 +155,21 @@ class UsersController extends AppController
                 $session = $this->getRequest()->getSession(); //get session
                 $session->write('email', $email); //write name value to session
                 $this->Flash->success(__('The user has been logged in successfully.'));
-
+                
                 return $this->redirect(['action' => 'list']);
             }
             $this->Flash->error(__('Please enter valid credential..'));
         }
         $this->set(compact('user'));
     }
-
+    
     public function getotp()
     {
-
+        
         // $this->viewBuilder()->setLayout('mydefault');
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
+            
             $token = $this->request->getData('token');
             $result = $this->Users->checktokenexist($token);
            
@@ -193,6 +194,7 @@ class UsersController extends AppController
             $token=$session->read('token');
             $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
                 $password = $this->request->getData('password');
                 $result=preg_match('(^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]*).{8,}$)', $password);
                 $confirm_password = $this->request->getData('confirm_password');
@@ -301,6 +303,6 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'list']);
     }
     public $paginate = [
-        'limit' => 5
+        'limit' => 10
     ];
 }

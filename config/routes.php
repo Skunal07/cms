@@ -42,6 +42,13 @@ return static function (RouteBuilder $routes) {
      * inconsistently cased URLs when used with `{plugin}`, `{controller}` and
      * `{action}` markers.
      */
+
+     $routes->prefix('Admin', function (RouteBuilder $routes) {
+        // Because you are in the admin scope,
+        // you do not need to include the /admin prefix
+        // or the Admin route element.
+        $routes->connect('/admin', ['controller' => 'Admin', 'action' => 'index']);
+    });
     $routes->setRouteClass(DashedRoute::class);
 
     $routes->scope('/', function (RouteBuilder $builder) {
@@ -51,7 +58,12 @@ return static function (RouteBuilder $routes) {
          * to use (in this case, templates/Pages/home.php)...
          */
         // $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-        $builder->connect('/', ['controller' => 'Users', 'action' => 'list']);
+        $builder->connect('/', ['controller' => 'Users', 'action' => 'home']);
+        $builder->connect('/signup', ['controller' => 'Users', 'action' => 'signup']);
+        $builder->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+        $builder->connect('/list', ['controller' => 'Users', 'action' => 'home']);
+        $builder->connect('/view/**', ['controller' => 'Users', 'action' => 'view'],['id'=>'Id']);
+        $builder->connect('/edit/**', ['controller' => 'Users', 'action' => 'edit'],['id'=>'Id']);
 
         /*
          * ...and connect the rest of 'Pages' controller's URLs.

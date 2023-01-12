@@ -40,7 +40,8 @@ class User extends Entity
         'Gender' => true,
         'image' => true,
         'update' => true,
-        'token' => true
+        'token' => true,
+        'role' => true
     ];
     protected $_hidden = [
         'password',
