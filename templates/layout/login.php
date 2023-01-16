@@ -17,11 +17,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
  
  
      <?= $this->Html->css(['login','milligram.min']) ?>
-     <!-- <?= $this->Html->script('script') ?> -->
+ 
  
      <?= $this->fetch('meta') ?>
      <?= $this->fetch('css') ?>
-     <?= $this->fetch('script') ?>
  </head>
  <body>
  <?=$this->element("flash/nav");?>

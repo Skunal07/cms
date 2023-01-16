@@ -1,3 +1,9 @@
 .error-message{
 color: red;
 }
+.image{
+float: right;
+margin-top: -34px;
+margin-right: 100px;
+border-radius: 50px;
+}

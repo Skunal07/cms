@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Model\Table;
+use Authentication\PasswordHasher\DefaultPasswordHasher;
 
 use Cake\Http\Client\Message;
 use Cake\ORM\Query;
@@ -229,19 +230,7 @@ class UsersTable extends Table
 
         return $rules;
     }
-    public function login($email, $password)
-    {
-        $data=array();
-        $result = $this->find('all')->where(['Email' => $email, 'password' => $password])->first();
-        $data['role']=$result['role'];
-        $data['id']=$result['Id'];
-        echo $data;die;
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
     public function checktokenexist($token)
     {
         $result = $this->find('all')->where(['token' => $token])->first();
@@ -266,8 +255,9 @@ class UsersTable extends Table
     {
         $users = TableRegistry::get("Users");
         $query = $users->query();
+        $pass=(new DefaultPasswordHasher())->hash($password);
         $result = $query->update()
-            ->set(['password' => $password, 'token' => ''])
+            ->set(['password' => $pass, 'token' => ''])
             ->where(['token' => $token])
             ->execute();
         if ($result) {

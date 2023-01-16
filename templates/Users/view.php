@@ -22,15 +22,19 @@ $this->Breadcrumbs->add(
             if ($session->read('email') != null) {
             ?>
                 <?= $this->Html->link(__('Back'), ['action' => 'list'], ['class' => 'button float-right']) ?>
-
-            <?php
+                
+                <?php
             } else {
-            ?>
+                ?>
                 <?= $this->Html->link(__('Back'), ['action' => 'home'], ['class' => 'nav-link active']) ?>
             <?php
             }
             ?>
             <table>
+                <tr>
+                    <th><?= __('Image ') ?></th>
+                    <td><?= $this->Html->image(h($user->image), array('width' => '200px','class'=>"image")) ?></td>
+                </tr>
                 <tr>
                     <th><?= __('First Name') ?></th>
                     <td><?= h($user->Fname) ?></td>
@@ -55,11 +59,8 @@ $this->Breadcrumbs->add(
                     <th><?= __('Phone Number') ?></th>
                     <td><?= h($user->Phone) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Image ') ?></th>
-                    <td><?= $this->Html->image(h($user->image), array('width' => '300px')) ?></td>
-                </tr>
             </table>
         </div>
     </div>
 </div>
+<?= $this->Html->css('user', ['block' => 'css']); ?>

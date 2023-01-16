@@ -1,5 +1,6 @@
 <section class="login py-5 bg-light ">
-    <?= $this->Form->create($user) ?>
+
+    <?= $this->Form->create() ?>
     <div class="container">
         <div class="row g-0">
             <div class="col-lg-5">
@@ -9,7 +10,7 @@
                 <h1>Sign In</h1>
                 <div class="form-row py-4 pt-5">
                     <div class="offset-1 col-lg-10">
-                        <?= $this->Form->control('Email', ['required' => false]) ?>
+                        <?= $this->Form->control('email', ['required' => false]) ?>
                         <span name="remove" id="error_email" class="text-danger ">
                         </span>
                     </div>
@@ -23,7 +24,8 @@
                 </div>
                 <div class="form-row py-4 pt-5">
                     <div class="offset-1 col-lg-10">
-                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->submit(__('Login')) ?>
+                        <?= $this->Form->end() ?>
                     </div>
                 </div>
                 <hr>
@@ -36,5 +38,4 @@
             </div>
         </div>
     </div>
-    <?= $this->Form->end() ?>
 </section>

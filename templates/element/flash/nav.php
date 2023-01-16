@@ -14,10 +14,6 @@
                         </a>
                     </li>
 
-                    <?php
-                    $session = $this->request->getSession(); //read session data
-                    if($session->read('email') != null){
-                    ?>
                     
                         <li class="nav-item">
                             <a class="navbar-brand" href="">
@@ -30,9 +26,6 @@
                             </a>
                         </li>
 
-                    <?php
-                    } else {
-                    ?>
                         <li class="nav-item">
                             <a class="navbar-brand" href="">
                                 <?= $this->Html->link(__('Login'), ['action' => 'login'], ['class' => 'nav-link active']) ?>
@@ -43,11 +36,6 @@
                                 <?= $this->Html->link(__('Signup'), ['action' => 'signup'], ['class' => 'nav-link active']) ?>
                             </a>
                         </li>
-
-                    <?php
-                    }
-                    ?>
-
                 </ul>
             </div>
         </div>

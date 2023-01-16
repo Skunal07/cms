@@ -28,7 +28,7 @@ $this->Breadcrumbs->add(
                             <span class="error-message" id="file-name-error"></span>
                         </div>
                         <div class="col-md-6">
-                            <td><?= $this->Html->image(h($user->image), array('width' => '200px')) ?></td>
+                            <td><?= $this->Html->image(h($user->image), array('width' => '200px','class'=>"image")) ?></td>
                         </div>
                         <div class="col-md-6">
                             <?= $this->Form->control('Fname') ?>
@@ -66,3 +66,4 @@ $this->Breadcrumbs->add(
         </div>
     </div>
 </div>
+<?= $this->Html->css('user', ['block' => 'css']); ?>
